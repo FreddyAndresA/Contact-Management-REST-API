@@ -1,5 +1,7 @@
 package ContactManagement.service;
 
+import ContactManagement.dto.ContactRequestDTO;
+import ContactManagement.dto.ContactResponseDTO;
 import ContactManagement.entity.Contact;
 
 import java.util.List;
@@ -7,15 +9,15 @@ import java.util.List;
 public interface ContactService {
 
     // Get all contacts
-    List<Contact> getContacts();
+    List<ContactResponseDTO> getAllContacts();
 
 
     // Get contact by Id
-    Contact getContact(Long id);
+    ContactResponseDTO getContactById(Long id);
 
 
     // Create contact
-    Contact createContact(Contact contact);
+    ContactResponseDTO createContact(ContactRequestDTO dto);
 
 
     // Delete contact
@@ -23,6 +25,6 @@ public interface ContactService {
 
 
     // Edit contact
-    Contact updateContact(Long id, Contact contact);
+    ContactResponseDTO updateContact(Long id, ContactRequestDTO dto);
 
 }
