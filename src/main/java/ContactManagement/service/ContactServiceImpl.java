@@ -3,6 +3,7 @@ package ContactManagement.service;
 import ContactManagement.dto.ContactRequestDTO;
 import ContactManagement.dto.ContactResponseDTO;
 import ContactManagement.entity.Contact;
+import ContactManagement.exception.ContactNotFoundException;
 import ContactManagement.mapper.ContactMapper;
 import ContactManagement.repository.ContactRepository;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public ContactResponseDTO getContactById(Long id) {
         Contact contact = contactRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Contact not found"));
+                .orElseThrow(() -> new ContactNotFoundException("Contact not found with Id" + id));
         return contactMapper.toResponseDTO(contact);
     }
 
@@ -52,7 +53,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public void deleteContact(Long id) {
         if (!contactRepository.existsById(id)) {
-            throw new RuntimeException("Contact not found");
+            throw new ContactNotFoundException("Contact not found with Id" + id);
         }
         contactRepository.deleteById(id);
     }
@@ -60,7 +61,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public ContactResponseDTO updateContact(Long id, ContactRequestDTO dto) {
 
-        Contact existingContact = contactRepository.findById(id).orElseThrow(() -> new RuntimeException("Contact not found"));
+        Contact existingContact = contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException("Contact not found with Id" + id));
 
         existingContact.setFirstName(dto.getFirstName());
         existingContact.setLastName(dto.getLastName());
