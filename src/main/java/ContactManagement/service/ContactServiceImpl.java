@@ -37,7 +37,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public ContactResponseDTO getContactById(Long id) {
         Contact contact = contactRepository.findById(id)
-                .orElseThrow(() -> new ContactNotFoundException("Contact not found with Id" + id));
+                .orElseThrow(() -> new ContactNotFoundException("Contact with ID " + id + " not found"));
         return contactMapper.toResponseDTO(contact);
     }
 
@@ -53,7 +53,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public void deleteContact(Long id) {
         if (!contactRepository.existsById(id)) {
-            throw new ContactNotFoundException("Contact not found with Id" + id);
+            throw new ContactNotFoundException("Contact with ID " + id + " not found");
         }
         contactRepository.deleteById(id);
     }
@@ -61,7 +61,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public ContactResponseDTO updateContact(Long id, ContactRequestDTO dto) {
 
-        Contact existingContact = contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException("Contact not found with Id" + id));
+        Contact existingContact = contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException("Contact with ID " + id + " not found"));
 
         existingContact.setFirstName(dto.getFirstName());
         existingContact.setLastName(dto.getLastName());
