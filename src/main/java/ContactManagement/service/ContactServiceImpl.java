@@ -4,6 +4,7 @@ import ContactManagement.dto.ContactRequestDTO;
 import ContactManagement.dto.ContactResponseDTO;
 import ContactManagement.entity.Contact;
 import ContactManagement.exception.ContactNotFoundException;
+import ContactManagement.exception.EmailAlreadyExistsException;
 import ContactManagement.mapper.ContactMapper;
 import ContactManagement.repository.ContactRepository;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,12 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public ContactResponseDTO createContact(ContactRequestDTO dto) {
+
+        contactRepository.findByEmail(dto.getEmail()
+        ).ifPresent(contact -> {
+            throw new EmailAlreadyExistsException("Contact with email " + dto.getEmail() + " already exists");
+        });
+
         Contact contact = contactMapper.toEntity(dto);
         Contact saved = contactRepository.save(contact);
         return contactMapper.toResponseDTO(saved);
@@ -61,7 +68,19 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public ContactResponseDTO updateContact(Long id, ContactRequestDTO dto) {
 
-        Contact existingContact = contactRepository.findById(id).orElseThrow(() -> new ContactNotFoundException("Contact with ID " + id + " not found"));
+        Contact existingContact = contactRepository.findById(id).orElseThrow(() ->
+                new ContactNotFoundException("Contact with ID " + id + " not found"));
+
+        if (contactRepository.existsByEmailAndIdNot(
+                dto.getEmail(),
+                id)) {
+
+            throw new EmailAlreadyExistsException(
+                    "Contact with email "
+                            + dto.getEmail()
+                            + " already exists"
+            );
+        }
 
         existingContact.setFirstName(dto.getFirstName());
         existingContact.setLastName(dto.getLastName());

@@ -4,6 +4,7 @@ import ContactManagement.dto.ContactRequestDTO;
 import ContactManagement.dto.ContactResponseDTO;
 import ContactManagement.entity.Contact;
 import ContactManagement.service.ContactService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +35,7 @@ public class ContactController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ContactResponseDTO createContact(@RequestBody ContactRequestDTO dto) {
+    public ContactResponseDTO createContact(@Valid @RequestBody ContactRequestDTO dto) {
         return contactService.createContact(dto);
     }
 
@@ -47,7 +48,7 @@ public class ContactController {
 
 
     @PutMapping("/{id}")
-    public  ContactResponseDTO updateContact(@PathVariable Long id, @RequestBody ContactRequestDTO dto) {
+    public  ContactResponseDTO updateContact(@Valid @PathVariable Long id, @RequestBody ContactRequestDTO dto) {
         return contactService.updateContact(id, dto);
     }
 

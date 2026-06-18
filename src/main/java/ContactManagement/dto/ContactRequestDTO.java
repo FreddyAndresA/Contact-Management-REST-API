@@ -1,14 +1,24 @@
 package ContactManagement.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+
 import java.time.LocalDate;
 
 public class ContactRequestDTO {
 
+    @NotBlank(message = "First name is required")
     private String firstName;
+    @NotBlank(message = "Last name is required")
     private String lastName;
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email format is invalid")
     private String email;
+    @NotBlank(message = "Phone is required")
     private String phone;
     private String cellphone;
+    @Past(message = "Date of birth must be in the past")
     private LocalDate dateOfBirth;
 
     public ContactRequestDTO() {
