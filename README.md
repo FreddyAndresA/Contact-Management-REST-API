@@ -114,8 +114,8 @@ Example:
 
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/contact_management
-spring.datasource.username=your_username
-spring.datasource.password=your_password
+spring.datasource.username=username
+spring.datasource.password=password
 ```
 
 ## Running the Project
@@ -138,21 +138,10 @@ Run the application:
 mvn spring-boot:run
 ```
 
-## Future Improvements
-
-* Pagination
-* Search and filtering
-* Unit testing
-* Docker support
-* Spring Security with JWT
-* Cloud deployment
-
 ## Author
 
 Freddy Angel
 
-Aspiring Java & Spring Boot Backend Developer.
-
-I am continuously learning and building projects to strengthen my backend development skills.
+Java & Spring Boot Backend Developer.
 
 Feedback and suggestions are always welcome.
