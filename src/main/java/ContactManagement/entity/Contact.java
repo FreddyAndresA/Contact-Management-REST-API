@@ -31,12 +31,10 @@ public class Contact {
 
 
     // Empty constructor
-
     public Contact() {
     }
 
     // Constructor without ID
-
     public Contact(String firstName, String lastName, String email, String cellphone, String phone, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;

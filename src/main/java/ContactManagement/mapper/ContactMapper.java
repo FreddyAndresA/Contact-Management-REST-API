@@ -15,7 +15,6 @@ public class ContactMapper {
         }
 
         Contact contact = new Contact();
-
         contact.setFirstName(dto.getFirstName());
         contact.setLastName(dto.getLastName());
         contact.setEmail(dto.getEmail());

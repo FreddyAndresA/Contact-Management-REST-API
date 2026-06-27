@@ -27,8 +27,6 @@ public class ContactController {
         this.contactService = contactService;
     }
 
-
-
     // GET ALL CONTACTS
     @Operation(
             summary = "Retrieve all contacts",
@@ -44,8 +42,6 @@ public class ContactController {
     public List<ContactResponseDTO> getAllContacts() {
         return contactService.getAllContacts();
     }
-
-
 
     // GET A CONTACT
     @Operation(
@@ -66,8 +62,6 @@ public class ContactController {
     public ContactResponseDTO getContactById(@PathVariable Long id){
         return contactService.getContactById(id);
     }
-
-
 
     // POST CONTACT
     @Operation(
@@ -94,8 +88,6 @@ public class ContactController {
         return contactService.createContact(dto);
     }
 
-
-
     // DELETE CONTACT
     @Operation(
             summary = "Delete a contact by ID",
@@ -116,8 +108,6 @@ public class ContactController {
     public void deleteContactById(@PathVariable Long id){
         contactService.deleteContact(id);
     }
-
-
 
     // EDIT CONTACT
     @Operation(
