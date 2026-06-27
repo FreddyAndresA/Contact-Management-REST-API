@@ -22,7 +22,7 @@ This project was created as part of my journey to become a Java/Spring Boot Back
 * Spring Boot 4
 * Spring Data JPA
 * Hibernate
-* MySQL
+* PostgreSQL
 * Maven
 * Swagger/OpenAPI
 * Postman
